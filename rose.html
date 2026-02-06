@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Bacha 🌹</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ffd1dc,#ffb3c6);
+  overflow:hidden;
+  color:white;
+}
+
+/* SCREENS */
+.screen{
+  position:absolute;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+#login{display:flex;}
+#pickRose{background:linear-gradient(135deg,#ffd1dc,#ffb3c6);}
+#note{background:linear-gradient(135deg,#ffd6e3,#ffc1d6);}
+#mainPage{background:linear-gradient(135deg,#ffc0cb,#ffb6c1);}
+
+/* COMMON */
+input{
+  padding:12px 20px;
+  border:none;
+  border-radius:25px;
+  outline:none;
+  text-align:center;
+}
+
+button{
+  margin-top:20px;
+  padding:10px 28px;
+  border:none;
+  border-radius:25px;
+  background:white;
+  color:#ff4d6d;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* PICK ROSE */
+.roses{
+  font-size:3rem;
+  display:flex;
+  gap:25px;
+  margin-top:30px;
+  cursor:pointer;
+}
+
+/* NOTE CARD */
+.note-card{
+  background:#fffbea;
+  color:#333;
+  padding:25px;
+  border-radius:15px;
+  max-width:420px;
+  margin:20px;
+  text-align:left;
+  font-family:'Georgia',serif;
+  line-height:1.6;
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* MAIN PAGE */
+h1{font-size:3rem;}
+.sub{font-style:italic;margin-top:10px;}
+.love{margin-top:15px;font-size:1.5rem;}
+.big-rose{font-size:4rem;margin:25px 0;}
+.message{max-width:500px;line-height:1.6;margin-bottom:20px;}
+.btns{display:flex;gap:20px;}
+
+/* RESPONSE MESSAGE */
+.response{
+  margin-top:25px;
+  font-size:1.3rem;
+  display:none;
+  animation:fadeIn 1.5s ease;
+}
+
+/* RING */
+.ring{
+  font-size:3rem;
+  margin-top:15px;
+  display:none;
+  animation:ringPulse 1.5s infinite;
+}
+
+@keyframes ringPulse{
+  0%{transform:scale(1); filter:drop-shadow(0 0 0 gold);}
+  50%{transform:scale(1.2); filter:drop-shadow(0 0 15px gold);}
+  100%{transform:scale(1); filter:drop-shadow(0 0 0 gold);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* FALLING ROSES */
+.petal{
+  position:absolute;
+  top:-40px;
+  font-size:18px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1️⃣ LOGIN -->
+<div class="screen" id="login">
+  <h2>Only for my love ❤️</h2>
+  <input type="password" id="pass" placeholder="Secret word">
+  <button onclick="unlock()">Unlock 🌹</button>
+</div>
+
+<!-- 2️⃣ PICK A ROSE -->
+<div class="screen" id="pickRose">
+  <h2>Pick a Rose 🌹</h2>
+  <p>One of these roses hides my feelings…</p>
+  <div class="roses" onclick="showNote()">🌹 🌹 🌹</div>
+</div>
+
+<!-- 3️⃣ NOTE -->
+<div class="screen" id="note">
+  <h2>From My Heart 💌</h2>
+  <div class="note-card">
+    My Dearest,<br><br>
+    Just like a rose, love fills my life with fragrance and color.
+    You are my most precious blessing.<br><br>
+    I promise to keep our love blooming forever.<br><br>
+    Always Yours ❤️<br>— Maulik
+  </div>
+  <button onclick="showMain()">Continue 🌹</button>
+</div>
+
+<!-- 4️⃣ MAIN PAGE -->
+<div class="screen" id="mainPage">
+  <h1>Chaitali Kanani 🌹</h1>
+  <div class="sub">My Bacha ❤️</div>
+  <div class="love">I love you ❤️</div>
+
+  <div class="big-rose">🌹</div>
+
+  <div class="message">
+    You are not just my rose for today,<br>
+    you are my forever garden of love.<br>
+    Every heartbeat of mine blooms only for you.
+  </div>
+
+  <h3>Will you always be mine? 💍</h3>
+
+  <div class="btns">
+    <button onclick="yesAnswer()">YES ❤️</button>
+    <button onclick="foreverAnswer()">FOREVER 💍</button>
+  </div>
+
+  <div class="ring" id="ring">💍</div>
+  <div class="response" id="responseText"></div>
+</div>
+
+<script>
+function unlock(){
+  if(pass.value.toLowerCase()==="bacha"){
+    login.style.display="none";
+    pickRose.style.display="flex";
+  }else{
+    alert("Only my Bacha knows the secret ❤️");
+  }
+}
+
+function showNote(){
+  pickRose.style.display="none";
+  note.style.display="flex";
+}
+
+function showMain(){
+  note.style.display="none";
+  mainPage.style.display="flex";
+  petals();
+}
+
+function yesAnswer(){
+  ring.style.display="none";
+  responseText.innerHTML="Your YES already means the world to me ❤️🌹";
+  responseText.style.display="block";
+}
+
+function foreverAnswer(){
+  ring.style.display="block";
+  responseText.innerHTML="Then my forever begins and ends with you 💍❤️";
+  responseText.style.display="block";
+}
+
+function petals(){
+  for(let i=0;i<40;i++){
+    let p=document.createElement("div");
+    p.className="petal";
+    p.innerHTML="🌹";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(Math.random()*4+5)+"s";
+    document.body.appendChild(p);
+  }
+}
+</script>
+
+</body>
+</html>
