@@ -1,231 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Bacha 🌹</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaiCha | Unlock Our Love ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --pink: #ff4d6d; --dark: #0b0104; --glass: rgba(255, 255, 255, 0.1); }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+        
+        body { 
+            background: var(--dark); 
+            color: white; 
+            overflow: hidden; 
+            height: 100vh;
+        }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            display: none; justify-content: space-between; align-items: center;
+            padding: 20px 60px; z-index: 1500;
+        }
+        .logo { font-family: 'Great Vibes'; font-size: 2.8rem; color: var(--pink); text-decoration: none; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-item { cursor: pointer; color: white; text-decoration: none; font-size: 1rem; }
+        .contact-icon { color: white; font-size: 1.2rem; cursor: pointer; }
+
+        /* PUZZLE ENTRY */
+        #game-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: var(--dark); z-index: 2000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .puzzle-title { font-family: 'Great Vibes'; color: var(--pink); font-size: 4rem; margin-bottom: 5px; }
+        .puzzle-container { display: flex; gap: 12px; margin: 30px 0; }
+        .slot { 
+            width: 60px; height: 60px; border: 2px dashed var(--pink); 
+            border-radius: 12px; display: flex; align-items: center; 
+            justify-content: center; font-weight: bold; color: var(--pink); font-size: 1.8rem; 
+        }
+        
+        .controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 450px; }
+        .btn-letter { 
+            width: 55px; height: 55px; background: var(--pink); border: none; 
+            color: white; border-radius: 10px; cursor: pointer; 
+            font-weight: bold; font-size: 1.3rem; 
+        }
+        .btn-erase { 
+            background: #444; width: auto; padding: 0 25px; height: 55px; 
+            display: flex; align-items: center; gap: 8px; border-radius: 10px; 
+            border: none; color: white; cursor: pointer; margin-top: 15px;
+        }
+
+        /* SECTIONS */
+        section { 
+    height: 100vh;
+    width: 100%;
+    display: none;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* ✅ FIX */
+    overflow-y: auto;
+    padding-bottom: 220px; /* space for dots + footer */
+}
+        .active { display: flex; }
+
+        /* TEXT BOXES */
+        .caption-pill { 
+    background: rgba(255,255,255,0.05);
+    padding: 30px 40px; 
+    border-radius: 20px; 
+    margin-top: 10px; 
+    border-left: 4px solid var(--pink);
+
+    max-width: 750px;
+    line-height: 1.7;
+
+    /* ✅ FIX */
+    max-height: 65vh;
+    overflow-y: auto;
 }
 
-body{
-  height:100vh;
-  background:linear-gradient(135deg,#ffd1dc,#ffb3c6);
-  overflow:hidden;
-  color:white;
-}
+        .story-scroll-box {
+            max-width: 800px; max-height: 55vh; overflow-y: auto; 
+            text-align: left; line-height: 1.8; padding: 40px; 
+            background: rgba(255, 255, 255, 0.05); border-radius: 30px; 
+            border-left: 5px solid var(--pink);
+        }
 
-/* SCREENS */
-.screen{
-  position:absolute;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-}
+        /* GALLERY */
+        .gallery-wrap { width: 100%; max-width: 1100px; height: 60vh; overflow-y: auto; padding: 20px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .gallery-grid img { width: 100%; height: 280px; object-fit: cover; border-radius: 15px; border: 1px solid var(--glass); }
 
-#login{display:flex;}
-#pickRose{background:linear-gradient(135deg,#ffd1dc,#ffb3c6);}
-#note{background:linear-gradient(135deg,#ffd6e3,#ffc1d6);}
-#mainPage{background:linear-gradient(135deg,#ffc0cb,#ffb6c1);}
-
-/* COMMON */
-input{
-  padding:12px 20px;
-  border:none;
-  border-radius:25px;
-  outline:none;
-  text-align:center;
-}
-
-button{
-  margin-top:20px;
-  padding:10px 28px;
-  border:none;
-  border-radius:25px;
-  background:white;
-  color:#ff4d6d;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* PICK ROSE */
-.roses{
-  font-size:3rem;
-  display:flex;
-  gap:25px;
-  margin-top:30px;
-  cursor:pointer;
-}
-
-/* NOTE CARD */
-.note-card{
-  background:#fffbea;
-  color:#333;
-  padding:25px;
-  border-radius:15px;
-  max-width:420px;
-  margin:20px;
-  text-align:left;
-  font-family:'Georgia',serif;
-  line-height:1.6;
-  box-shadow:0 15px 30px rgba(0,0,0,0.15);
-}
-
-/* MAIN PAGE */
-h1{font-size:3rem;}
-.sub{font-style:italic;margin-top:10px;}
-.love{margin-top:15px;font-size:1.5rem;}
-.big-rose{font-size:4rem;margin:25px 0;}
-.message{max-width:500px;line-height:1.6;margin-bottom:20px;}
-.btns{display:flex;gap:20px;}
-
-/* RESPONSE MESSAGE */
-.response{
-  margin-top:25px;
-  font-size:1.3rem;
-  display:none;
-  animation:fadeIn 1.5s ease;
-}
-
-/* RING */
-.ring{
-  font-size:3rem;
-  margin-top:15px;
-  display:none;
-  animation:ringPulse 1.5s infinite;
-}
-
-@keyframes ringPulse{
-  0%{transform:scale(1); filter:drop-shadow(0 0 0 gold);}
-  50%{transform:scale(1.2); filter:drop-shadow(0 0 15px gold);}
-  100%{transform:scale(1); filter:drop-shadow(0 0 0 gold);}
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* FALLING ROSES */
-.petal{
-  position:absolute;
-  top:-40px;
-  font-size:18px;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg);}
-}
-</style>
+        /* FOOTER */
+        .footer-fixed {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            display: none; flex-direction: column; align-items: center;
+            padding-bottom: 30px; z-index: 1000;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9) 50%);
+        }
+        .dots { display: flex; gap: 15px; margin-bottom: 20px; }
+        .dot { 
+            width: 40px; height: 40px; border-radius: 50%; 
+            border: 1px solid var(--pink); display: flex; align-items: center; 
+            justify-content: center; cursor: pointer; transition: 0.3s; 
+            background: rgba(0,0,0,0.6);
+        }
+        .dot.active-dot { background: var(--pink); }
+        .footer-icons { display: flex; gap: 40px; font-size: 1.6rem; }
+        .icon-btn { color: white; cursor: pointer; transition: 0.3s; text-decoration: none; }
+    </style>
 </head>
-
 <body>
 
-<!-- 1️⃣ LOGIN -->
-<div class="screen" id="login">
-  <h2>Only for my love ❤️</h2>
-  <input type="password" id="pass" placeholder="Secret word">
-  <button onclick="unlock()">Unlock 🌹</button>
+<div id="game-overlay">
+    <h1 class="puzzle-title">Unlock Our Story</h1>
+    <p style="margin-bottom: 15px; opacity: 0.8;">Arrange the letters to find our secret name</p>
+    <div class="puzzle-container">
+        <div class="slot" id="s1">?</div><div class="slot" id="s2">?</div><div class="slot" id="s3">?</div>
+        <div class="slot" id="s4">?</div><div class="slot" id="s5">?</div><div class="slot" id="s6">?</div>
+    </div>
+    <div class="controls">
+        <button class="btn-letter" onclick="add('A')">A</button><button class="btn-letter" onclick="add('M')">M</button>
+        <button class="btn-letter" onclick="add('C')">C</button><button class="btn-letter" onclick="add('I')">I</button>
+        <button class="btn-letter" onclick="add('H')">H</button><button class="btn-letter" onclick="add('A')">A</button>
+    </div>
+    <button class="btn-erase" onclick="erase()"><i class="fas fa-times-circle"></i> Erase</button>
+    <p style="margin-top: 20px; opacity: 0.4;">Hint: M _ _ _ _ A</p>
 </div>
 
-<!-- 2️⃣ PICK A ROSE -->
-<div class="screen" id="pickRose">
-  <h2>Pick a Rose 🌹</h2>
-  <p>One of these roses hides my feelings…</p>
-  <div class="roses" onclick="showNote()">🌹 🌹 🌹</div>
-</div>
+<header id="header">
+    <a href="#" class="logo" onclick="show('welcome')">MaiCha</a>
+    <div class="nav-links">
+        <span class="nav-item" onclick="show('story')">Our Story</span>
+        <span class="nav-item" onclick="show('gallery')">Our Gallery</span>
+        <i class="fas fa-phone contact-icon" onclick="alert('7777953294')"></i>
+        <i class="fas fa-envelope contact-icon" onclick="alert('maulikvasani623@gmail.com')"></i>
+    </div>
+</header>
 
-<!-- 3️⃣ NOTE -->
-<div class="screen" id="note">
-  <h2>From My Heart 💌</h2>
-  <div class="note-card">
-    My Dearest,<br><br>
-    Just like a rose, love fills my life with fragrance and color.
-    You are my most precious blessing.<br><br>
-    I promise to keep our love blooming forever.<br><br>
-    Always Yours ❤️<br>— Maulik
-  </div>
-  <button onclick="showMain()">Continue 🌹</button>
-</div>
+<main id="main" style="display:none;">
+    <section id="welcome" class="active">
+        <h1 style="font-family:'Great Vibes'; font-size: 5.5rem; color: var(--pink);">Maulik weds Chaitali</h1>
+        <p style="font-size: 1.2rem; margin: 15px 0;">You solved it! Welcome to our 8 days of pure magic.</p>
+        <button class="btn-letter" style="width:auto; padding:0 40px;" onclick="show('day-7')">Enter Week</button>
+    </section>
 
-<!-- 4️⃣ MAIN PAGE -->
-<div class="screen" id="mainPage">
-  <h1>Chaitali Kanani 🌹</h1>
-  <div class="sub">My Bacha ❤️</div>
-  <div class="love">I love you ❤️</div>
+    <div id="day-pages"></div>
 
-  <div class="big-rose">🌹</div>
+    <section id="story">
+        <h1 style="font-family:'Great Vibes'; font-size: 4rem; color: var(--pink); margin-bottom: 20px;">Our Story 🌹</h1>
+        <div class="story-scroll-box">
+            <p style="font-size: 1.1rem;">
+                Our story truly began on <b>4th October</b>, but fate had been quietly preparing me long before that. <br><br>
+                I had already seen you many times in my Amreli. Every time I noticed you, something about you felt different. 
+                You always looked calm, carefree, and full of innocence — like a girl with no worries in the world. 
+                That simplicity stayed in my heart. <br><br>
+                On <b>2nd October</b>, at the Lohana Garba ground in Ajmeera, I saw you again. 
+                That night, I was deeply impressed. Your expressions, your calm energy, your reactions — everything felt exactly like me. 
+                Same mindset. Same vibe. Without realizing it, my heart had already started choosing you. <br><br>
+                Then destiny played its role. <br><br>
+                On <b>4th October</b>, you came to my home to rent a chaniya choli. 
+                The moment I realized you were standing in my house, I was shocked — in the most beautiful way. 
+                From that moment, my eyes did only one thing — they searched for you, and only you. <br><br>
+                God gave me a chance through a simple flower from my garden. 
+                I told you that according to Hindu beliefs, flowers should not be plucked after evening, 
+                so if you needed one, you should take it before sunset. You smiled and cut the flower. <br><br>
+                Then I asked, “Can I borrow that flower?” <br>
+                You asked, “Why?” <br>
+                And I replied, “I’ll give it back to you instantly.” <br><br>
+                You handed me the flower… and I handed it back saying, <b>“I LOVE YOU.”</b> <br><br>
+                You didn’t say anything. You didn’t react loudly. You just smiled. And honestly… that smile said everything. <br><br>
+                That Garba night — white kediyu, Krishna tilak, innocent steps — you looked unreal. 
+                I played Garba with full energy, but my eyes were only searching for you. Everyone else became a blur. <br><br>
+                That night, I won 1st prize. But I was already the winner — because I had found you. <br><br>
+                Days later, destiny found its way again. On <b>10th November</b>, we finally started talking. 
+                That day wasn’t just a conversation — it was the beginning of us. <br><br>
+                And today, <b>10th February</b>, we proudly complete <b>3 beautiful months together</b>. <br><br>
+                From silent stares to endless talks… from destiny to love… this is <b>Our Story ❤️</b>
+            </p>
+        </div>
+    </section>
 
-  <div class="message">
-    You are not just my rose for today,<br>
-    you are my forever garden of love.<br>
-    Every heartbeat of mine blooms only for you.
-  </div>
+    <section id="gallery">
+        <h1 style="font-family:'Great Vibes'; font-size: 4rem; color: var(--pink); margin-bottom: 25px;">Our Memories 📸</h1>
+        <div class="gallery-wrap">
+            <div class="gallery-grid">
+                <img src="maulik_pic.jpg">
+                <img src="Snapchat-1138214147.jpg">
+                <img src="Cm.jpg">
+                <img src="Cm2.jpg">
+                <img src="1.jpg.jfif">
+                <img src="2.jpg.jpg">
+                <img src="3.jpg.jpg">
+                <img src="5.jpg.jpg">
+                <img src="6.jpg.jpg">
+                <img src="7.jpg.jpg">
+                <img src="8.jpg.jpg">
+                <img src="9.jpg.jpg">
+                <img src="10.jpg.jpg">
+                <img src="11.png.jpg">
+                <img src="12.jpg.jpg">
+                <img src="13.jpg.jpg">
+                <img src="14.jpg.jpg">
+                <img src="16.jpg.jpg">
+                <img src="17.jpg.jpg">
+                <img src="18.jpg.jpg">
+                <img src="19.jpg.jpg">
+                <img src="20.jpg.jpg">
+                <img src="21.jpg.jpg">
+                <img src="22.jpg.jpg">
+            </div>
+        </div>
+    </section>
+</main>
 
-  <h3>Will you always be mine? 💍</h3>
-
-  <div class="btns">
-    <button onclick="yesAnswer()">YES ❤️</button>
-    <button onclick="foreverAnswer()">FOREVER 💍</button>
-  </div>
-
-  <div class="ring" id="ring">💍</div>
-  <div class="response" id="responseText"></div>
+<div class="footer-fixed" id="footer">
+    <div class="dots" id="dotNav"></div>
+    <div class="footer-icons">
+        <i class="fas fa-home icon-btn" onclick="show('welcome')"></i>
+        <a href="tel:7777953294" class="icon-btn"><i class="fas fa-phone"></i></a>
+        <a href="mailto:maulikvasani623@gmail.com" class="icon-btn"><i class="fas fa-envelope"></i></a>
+        <i class="fas fa-heart icon-btn" onclick="show('story')"></i>
+    </div>
+    <p style="font-size: 0.8rem; opacity: 0.4; margin-top: 15px;">&copy; 2026 MaiCha | Handcrafted with Love</p>
 </div>
 
 <script>
-function unlock(){
-  if(pass.value.toLowerCase()==="bacha"){
-    login.style.display="none";
-    pickRose.style.display="flex";
-  }else{
-    alert("Only my Bacha knows the secret ❤️");
-  }
-}
+    let input = "";
+    function add(l) {
+        if(input.length < 6) {
+            input += l;
+            document.getElementById('s' + input.length).innerText = l;
+            if(input.length === 6) {
+                if(input === "MAICHA") unlock();
+                else { alert("Try Again!"); resetPuzzle(); }
+            }
+        }
+    }
+    function erase() { if(input.length > 0) { document.getElementById('s' + input.length).innerText = "?"; input = input.slice(0, -1); } }
+    function resetPuzzle() { input = ""; for(let i=1; i<=6; i++) document.getElementById('s' + i).innerText = "?"; }
 
-function showNote(){
-  pickRose.style.display="none";
-  note.style.display="flex";
-}
+    function unlock() {
+        document.getElementById('game-overlay').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+        document.getElementById('header').style.display = 'flex';
+        document.getElementById('footer').style.display = 'flex';
+    }
 
-function showMain(){
-  note.style.display="none";
-  mainPage.style.display="flex";
-  petals();
-}
+    const days = [7,8,9,10,11,12,13,14];
+    days.forEach(d => {
+        const s = document.createElement('section'); s.id = `day-${d}`;
+        let thought = "";
+        let dayName = "Day " + d;
 
-function yesAnswer(){
-  ring.style.display="none";
-  responseText.innerHTML="Your YES already means the world to me ❤️🌹";
-  responseText.style.display="block";
+        if(d===7) { 
+    dayName = "Rose Day"; 
+    thought = "Like a rose, our love began with a gentle touch and a fragrance that still lingers in my soul."; 
 }
+else if(d===8) { 
+    dayName = "Propose Day"; 
+    thought = "That October 4th flower was just the start. Today, I propose to love you more with every second."; 
+}
+else if(d===9) { 
+    dayName = "Chocolate Day"; 
+    thought = "Your smile is sweeter than any chocolate. You are the sweetness that makes my life complete."; 
+}
+else if(d===10) { 
+    dayName = "Teddy Day"; 
+    thought = "You are my favorite person to hold onto. Thank you for being the warmth I always searched for."; 
+}
+else if(d===11) { 
+    dayName = "Promise Day"; 
+    thought = `
+I promise to protect your innocence and be yours forever,
+just like that night on the Garba ground.
 
-function foreverAnswer(){
-  ring.style.display="block";
-  responseText.innerHTML="Then my forever begins and ends with you 💍❤️";
-  responseText.style.display="block";
-}
+<br><br>
 
-function petals(){
-  for(let i=0;i<40;i++){
-    let p=document.createElement("div");
-    p.className="petal";
-    p.innerHTML="🌹";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDuration=(Math.random()*4+5)+"s";
-    document.body.appendChild(p);
-  }
+I promise I will always be with you, and I will never lose you.
+In every situation, in every phase of life, I will stand by you.
+
+<br><br>
+
+I promise to hold your hand and walk beside you
+until the earth and the universe itself have no end.
+Staying with you forever is my promise.
+
+<br><br>
+
+Every day, I promise to love you more and more,
+to fill your life with happiness,
+and to always listen to you —
+your daily routine, your thoughts, your feelings.
+
+<br><br>
+
+Every problem that comes our way,
+we will face it together and solve it together.
+
+<br><br>
+
+Even if people try to create misunderstandings between us,
+we will remain the same —
+because our trust in each other is so strong
+that no one will ever be able to separate us.
+
+<br><br>
+
+This is my promise —
+today, tomorrow, and forever.
+`;
 }
+else if(d===12) { 
+    dayName = "Hug Day"; 
+    thought = "In your arms, I found my home. A single hug from you is enough to heal everything."; 
+}
+else if(d===13) { 
+    dayName = "Kiss Day"; 
+    thought = "Every moment shared with you is a treasure. Sealed with loyalty, our love is a journey I never want to end."; 
+}
+else if(d===14) { 
+    dayName = "Valentine's Day"; 
+    thought = `
+From Amreli's silent stares
+to three beautiful months of togetherness,
+this journey has been nothing but magical.
+
+<br><br>
+
+You are not just my love.
+
+<br><br>
+
+You are my queen, my future wife,
+my best friend, my dear, my everything.
+
+<br><br>
+
+You are my strength, my support system,
+my safe place — just like a mother’s care
+and a partner’s love combined.
+
+<br><br>
+
+I will always love you, my bacha —
+forever, ever, and ever.
+
+<br><br>
+
+And just like before,
+until the earth and the universe have no end,
+I will always love you more.
+
+<br><br>
+
+You are my destiny.
+Happy Valentine’s Day, Chaitali ❤️
+`;
+}
+        s.innerHTML = `<h1 style="font-family:'Great Vibes'; color:var(--pink); font-size:4.5rem; margin-bottom:30px;">${dayName}</h1>
+                      <div class="caption-pill"><p style="font-size:1.4rem; font-style:italic;">"${thought}"</p></div>`;
+        document.getElementById('day-pages').appendChild(s);
+        const dot = document.createElement('div'); dot.className = 'dot'; dot.id = 'dot-' + d; dot.innerText = d;
+        dot.onclick = () => show(`day-${d}`, dot);
+        document.getElementById('dotNav').appendChild(dot);
+    });
+
+    function show(id, dot) {
+        document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active-dot'));
+        if(!dot && id.includes('day')) {
+            const num = id.split('-')[1];
+            dot = document.getElementById('dot-' + num);
+        }
+        if(dot) dot.classList.add('active-dot');
+    }
 </script>
-
 </body>
 </html>
