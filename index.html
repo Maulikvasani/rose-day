@@ -57,39 +57,22 @@
 
         /* SECTIONS */
         section { 
-    height: 100vh;
-    width: 100%;
-    display: none;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center; 
-    padding: 20px;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    /* ✅ FIX */
-    overflow-y: auto;
-    padding-bottom: 220px; /* space for dots + footer */
-}
+            height: 100vh; width: 100%;
+            display: none; flex-direction: column; 
+            justify-content: center; align-items: center; 
+            padding: 20px; text-align: center;
+            position: absolute; top: 0; left: 0;
+            overflow-y: auto;
+            padding-bottom: 220px; 
+        }
         .active { display: flex; }
 
         /* TEXT BOXES */
         .caption-pill { 
-    background: rgba(255,255,255,0.05);
-    padding: 30px 40px; 
-    border-radius: 20px; 
-    margin-top: 10px; 
-    border-left: 4px solid var(--pink);
-
-    max-width: 750px;
-    line-height: 1.7;
-
-    /* ✅ FIX */
-    max-height: 65vh;
-    overflow-y: auto;
-}
+            background: rgba(255,255,255,0.05); padding: 30px 40px; 
+            border-radius: 20px; margin-top: 10px; border-left: 4px solid var(--pink);
+            max-width: 750px; line-height: 1.7; max-height: 65vh; overflow-y: auto;
+        }
 
         .story-scroll-box {
             max-width: 800px; max-height: 55vh; overflow-y: auto; 
@@ -120,6 +103,28 @@
         .dot.active-dot { background: var(--pink); }
         .footer-icons { display: flex; gap: 40px; font-size: 1.6rem; }
         .icon-btn { color: white; cursor: pointer; transition: 0.3s; text-decoration: none; }
+
+        /* ✅ MOBILE RESPONSIVE FIXES */
+        @media screen and (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .logo { font-size: 2rem; }
+            .nav-links { gap: 15px; }
+            .nav-item { font-size: 0.8rem; }
+            
+            .puzzle-title { font-size: 2.5rem; }
+            .slot { width: 45px; height: 45px; font-size: 1.2rem; }
+            .btn-letter { width: 45px; height: 45px; font-size: 1rem; }
+            
+            section h1 { font-size: 2.5rem !important; }
+            .caption-pill, .story-scroll-box { padding: 20px; width: 90%; }
+            
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+            .gallery-grid img { height: 180px; }
+
+            .dot { width: 32px; height: 32px; font-size: 0.8rem; }
+            .dots { gap: 8px; flex-wrap: wrap; justify-content: center; }
+            .footer-icons { gap: 25px; font-size: 1.3rem; }
+        }
     </style>
 </head>
 <body>
@@ -166,6 +171,7 @@
                 Our story truly began on <b>4th October</b>, but fate had been quietly preparing me long before that. <br><br>
                 I had already seen you many times in my Amreli. Every time I noticed you, something about you felt different. 
                 You always looked calm, carefree, and full of innocence — like a girl with no worries in the world. 
+                Your reactions were pure and natural, just like a small child studying in primary school. 
                 That simplicity stayed in my heart. <br><br>
                 On <b>2nd October</b>, at the Lohana Garba ground in Ajmeera, I saw you again. 
                 That night, I was deeply impressed. Your expressions, your calm energy, your reactions — everything felt exactly like me. 
@@ -265,111 +271,21 @@
         let thought = "";
         let dayName = "Day " + d;
 
-        if(d===7) { 
-    dayName = "Rose Day"; 
-    thought = "Like a rose, our love began with a gentle touch and a fragrance that still lingers in my soul."; 
-}
-else if(d===8) { 
-    dayName = "Propose Day"; 
-    thought = "That October 4th flower was just the start. Today, I propose to love you more with every second."; 
-}
-else if(d===9) { 
-    dayName = "Chocolate Day"; 
-    thought = "Your smile is sweeter than any chocolate. You are the sweetness that makes my life complete."; 
-}
-else if(d===10) { 
-    dayName = "Teddy Day"; 
-    thought = "You are my favorite person to hold onto. Thank you for being the warmth I always searched for."; 
-}
-else if(d===11) { 
-    dayName = "Promise Day"; 
-    thought = `
-I promise to protect your innocence and be yours forever,
-just like that night on the Garba ground.
+        if(d===7) { dayName = "Rose Day"; thought = "Like a rose, our love began with a gentle touch and a fragrance that still lingers in my soul."; }
+        else if(d===8) { dayName = "Propose Day"; thought = "That October 4th flower was just the start. Today, I propose to love you more with every second."; }
+        else if(d===9) { dayName = "Chocolate Day"; thought = "Your smile is sweeter than any chocolate. You are the sweetness that makes my life complete."; }
+        else if(d===10) { dayName = "Teddy Day"; thought = "You are my favorite person to hold onto. Thank you for being the warmth I always searched for."; }
+        else if(d===11) { 
+            dayName = "Promise Day"; 
+            thought = `I promise to protect your innocence and be yours forever, just like that night on the Garba ground. <br><br> I promise I will always be with you, and I will never lose you. In every situation, in every phase of life, I will stand by you. <br><br> I promise to hold your hand and walk beside you until the earth and the universe itself have no end. Staying with you forever is my promise.`;
+        }
+        else if(d===12) { dayName = "Hug Day"; thought = "In your arms, I found my home. A single hug from you is enough to heal everything."; }
+        else if(d===13) { dayName = "Kiss Day"; thought = "Every moment shared with you is a treasure. Sealed with loyalty, our love is a journey I never want to end."; }
+        else if(d===14) { 
+            dayName = "Valentine's Day"; 
+            thought = `From Amreli's silent stares to three beautiful months of togetherness, this journey has been nothing but magical. <br><br> You are not just my love. You are my queen, my future wife, my best friend, my everything. <br><br> You are my strength, my support system, my safe place. I will always love you, my bacha — forever, ever, and ever. <br><br> Happy Valentine’s Day, Chaitali ❤️`;
+        }
 
-<br><br>
-
-I promise I will always be with you, and I will never lose you.
-In every situation, in every phase of life, I will stand by you.
-
-<br><br>
-
-I promise to hold your hand and walk beside you
-until the earth and the universe itself have no end.
-Staying with you forever is my promise.
-
-<br><br>
-
-Every day, I promise to love you more and more,
-to fill your life with happiness,
-and to always listen to you —
-your daily routine, your thoughts, your feelings.
-
-<br><br>
-
-Every problem that comes our way,
-we will face it together and solve it together.
-
-<br><br>
-
-Even if people try to create misunderstandings between us,
-we will remain the same —
-because our trust in each other is so strong
-that no one will ever be able to separate us.
-
-<br><br>
-
-This is my promise —
-today, tomorrow, and forever.
-`;
-}
-else if(d===12) { 
-    dayName = "Hug Day"; 
-    thought = "In your arms, I found my home. A single hug from you is enough to heal everything."; 
-}
-else if(d===13) { 
-    dayName = "Kiss Day"; 
-    thought = "Every moment shared with you is a treasure. Sealed with loyalty, our love is a journey I never want to end."; 
-}
-else if(d===14) { 
-    dayName = "Valentine's Day"; 
-    thought = `
-From Amreli's silent stares
-to three beautiful months of togetherness,
-this journey has been nothing but magical.
-
-<br><br>
-
-You are not just my love.
-
-<br><br>
-
-You are my queen, my future wife,
-my best friend, my dear, my everything.
-
-<br><br>
-
-You are my strength, my support system,
-my safe place — just like a mother’s care
-and a partner’s love combined.
-
-<br><br>
-
-I will always love you, my bacha —
-forever, ever, and ever.
-
-<br><br>
-
-And just like before,
-until the earth and the universe have no end,
-I will always love you more.
-
-<br><br>
-
-You are my destiny.
-Happy Valentine’s Day, Chaitali ❤️
-`;
-}
         s.innerHTML = `<h1 style="font-family:'Great Vibes'; color:var(--pink); font-size:4.5rem; margin-bottom:30px;">${dayName}</h1>
                       <div class="caption-pill"><p style="font-size:1.4rem; font-style:italic;">"${thought}"</p></div>`;
         document.getElementById('day-pages').appendChild(s);
